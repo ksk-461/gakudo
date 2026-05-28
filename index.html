@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --green-dark: #27500a;
+        --green-mid: #3b6d11;
+        --green-light: #639922;
+        --green-pale: #eaf3de;
+        --green-soft: #c0dd97;
+        --amber: #6b6255;
+        --amber-pale: #faeeda;
+        --amber-light: #fac775;
+        --teal: #0f6e56;
+        --teal-pale: #e1f5ee;
+        --teal-soft: #9fe1cb;
+        --warm-white: #fafaf7;
+        --gray-text: #444441;
+        --gray-mid: #888780;
+        --gray-pale: #f1efe8;
+        --font-serif: "Noto Serif JP", serif;
+        --font-sans: "Noto Sans JP", sans-serif;
+      }
+      body {
+        font-family: var(--font-sans);
+        color: var(--gray-text);
+        background: var(--warm-white);
+        line-height: 1.8;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* HERO — コンパクト化 */
+      .hero {
+        background: linear-gradient(
+          160deg,
+          #1a3a0a 0%,
+          #2d5a14 40%,
+          #1a4a30 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 36px 24px 32px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E");
+        opacity: 0.6;
+      }
+      .hero-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-bottom: 14px;
+        backdrop-filter: blur(4px);
+        position: relative;
+      }
+      .hero h1 {
+        font-family: var(--font-serif);
+        font-size: clamp(22px, 4vw, 42px);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.45;
+        margin-bottom: 10px;
+        position: relative;
+      }
+      .hero h1 em {
+        color: var(--green-soft);
+        font-style: normal;
+      }
+      .hero-sub {
+        font-size: clamp(13px, 1.8vw, 15px);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 20px;
+        max-width: 480px;
+        position: relative;
+        line-height: 1.7;
+      }
+      .hero-cta {
+        display: inline-block;
+        background: #fff;
+        color: var(--green-dark);
+        font-weight: 700;
+        font-size: 15px;
+        padding: 12px 32px;
+        border-radius: 40px;
+        letter-spacing: 0.05em;
+        transition: transform 0.2s;
+        position: relative;
+      }
+      .hero-cta:hover {
+        transform: translateY(-2px);
+      }
+
+      /* SECTION COMMON */
+      section {
+        padding: 64px 24px;
+      }
+      .inner {
+        max-width: 840px;
+        margin: 0 auto;
+      }
+      .section-label {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        color: var(--green-mid);
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .section-title {
+        font-family: var(--font-serif);
+        font-size: clamp(22px, 3.5vw, 36px);
+        font-weight: 700;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+      .section-lead {
+        font-size: 16px;
+        color: var(--gray-mid);
+        line-height: 1.9;
+        margin-bottom: 48px;
+      }
+
+      /* EMPATHY */
+      .empathy {
+        background: #fff;
+      }
+      .pain-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .pain-card {
+        border: 1.5px solid var(--green-pale);
+        border-radius: 12px;
+        padding: 24px 20px;
+        background: var(--green-pale);
+        position: relative;
+        overflow: hidden;
+      }
+      .pain-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--green-light);
+      }
+      .pain-card p {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--green-dark);
+      }
+      .pain-card p strong {
+        font-size: 18px;
+        display: block;
+        margin-bottom: 8px;
+        font-family: var(--font-serif);
+      }
+      .arrow-down {
+        text-align: center;
+        padding: 32px 0;
+        font-size: 32px;
+        color: var(--green-mid);
+      }
+      .solution-box {
+        background: var(--green-dark);
+        color: #fff;
+        border-radius: 16px;
+        padding: 36px 40px;
+        text-align: center;
+      }
+      .solution-box h3 {
+        font-family: var(--font-serif);
+        font-size: 22px;
+        margin-bottom: 12px;
+      }
+      .solution-box p {
+        font-size: 15px;
+        line-height: 1.9;
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      /* FEATURES */
+      .features {
+        background: var(--gray-pale);
+      }
+      .feat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+      .feat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 28px 24px;
+        border: 0.5px solid #d3d1c7;
+      }
+      .feat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        font-size: 20px;
+      }
+      .feat-icon.g {
+        background: var(--green-pale);
+        color: var(--green-dark);
+      }
+      .feat-icon.a {
+        background: var(--amber-pale);
+        color: var(--amber);
+      }
+      .feat-icon.t {
+        background: var(--teal-pale);
+        color: var(--teal);
+      }
+      .feat-card h4 {
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+      .feat-card p {
+        font-size: 14px;
+        color: var(--gray-mid);
+        line-height: 1.8;
+      }
+
+      /* PROGRAM */
+      .program {
+        background: #fff;
+      }
+      .timeline {
+        position: relative;
+        padding-left: 32px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--green-pale);
+      }
+      .tl-item {
+        position: relative;
+        margin-bottom: 28px;
+      }
+      .tl-dot {
+        position: absolute;
+        left: -28px;
+        top: 4px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--green-light);
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 2px var(--green-light);
+      }
+      .tl-time {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--green-mid);
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+      }
+      .tl-label {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--gray-text);
+      }
+      .tl-desc {
+        font-size: 14px;
+        color: var(--gray-mid);
+        margin-top: 4px;
+        line-height: 1.7;
+      }
+
+      /* INFO */
+      .info-section {
+        background: var(--teal-pale);
+      }
+      .info-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .info-table tr {
+        border-bottom: 1px solid rgba(15, 110, 86, 0.15);
+      }
+      .info-table tr:last-child {
+        border-bottom: none;
+      }
+      .info-table th {
+        width: 140px;
+        padding: 16px 16px 16px 0;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--teal);
+        vertical-align: top;
+        white-space: nowrap;
+      }
+      .info-table td {
+        padding: 16px 0;
+        font-size: 15px;
+        line-height: 1.8;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .badge {
+        display: inline-block;
+        background: var(--teal);
+        color: #fff;
+        font-size: 12px;
+        padding: 4px 12px;
+        border-radius: 20px;
+      }
+      .price-big {
+        font-size: 24px;
+        font-weight: 700;
+        font-family: var(--font-serif);
+        color: var(--teal);
+      }
+
+      /* STAFF & FAQ */
+      .staff-faq {
+        background: #fff;
+      }
+      .staff-row {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 48px;
+      }
+      .staff-card {
+        flex: 1;
+        min-width: 180px;
+        border: 0.5px solid #d3d1c7;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+      }
+      .staff-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin: 0 auto 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+      .staff-avatar.green {
+        background: var(--green-pale);
+      }
+      .staff-avatar.amber {
+        background: var(--amber-pale);
+      }
+      .staff-avatar.teal {
+        background: var(--teal-pale);
+      }
+      .staff-card h5 {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .staff-card p {
+        font-size: 12px;
+        color: var(--gray-mid);
+        line-height: 1.6;
+      }
+      .faq-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--green-mid);
+        letter-spacing: 0.1em;
+        margin-bottom: 20px;
+      }
+      .faq-item {
+        border-top: 1px solid var(--gray-pale);
+        padding: 20px 0;
+      }
+      .faq-item:last-child {
+        border-bottom: 1px solid var(--gray-pale);
+      }
+      .faq-q {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+      .faq-q::before {
+        content: "Q. ";
+        color: var(--green-mid);
+      }
+      .faq-a {
+        font-size: 14px;
+        color: var(--gray-mid);
+        line-height: 1.8;
+      }
+      .faq-a::before {
+        content: "A. ";
+        color: var(--amber);
+        font-weight: 700;
+      }
+
+      /* CTA FOOTER */
+      .cta-footer {
+        background: linear-gradient(
+          135deg,
+          var(--green-dark) 0%,
+          var(--teal) 100%
+        );
+        text-align: center;
+        padding: 64px 24px;
+      }
+      .cta-footer h2 {
+        font-family: var(--font-serif);
+        font-size: clamp(22px, 3vw, 32px);
+        color: #fff;
+        margin-bottom: 16px;
+      }
+      .cta-footer p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 15px;
+        margin-bottom: 40px;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-white {
+        background: #fff;
+        color: var(--green-dark);
+        font-weight: 700;
+        padding: 14px 36px;
+        border-radius: 40px;
+        font-size: 15px;
+        transition: transform 0.2s;
+      }
+      .btn-white:hover {
+        transform: translateY(-2px);
+      }
+      .btn-outline {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        color: #fff;
+        font-weight: 700;
+        padding: 14px 36px;
+        border-radius: 40px;
+        font-size: 15px;
+      }
+
+      footer {
+        background: var(--green-dark);
+        color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+        padding: 24px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <span class="hero-badge">民間学童保育　2024年4月開校予定</span>
+      <h1>ただ預けるだけじゃない、<em>未来をつくる放課後へ。</em></h1>
+      <p class="hero-sub">
+        地域の企業と連携した体験型学童。安心の見守りと、一流の学びが、ここにある。
+      </p>
+      <a href="#info" class="hero-cta">入所説明会のご案内を見る</a>
+    </section>
+
+    <section class="empathy">
+      <div class="inner">
+        <div class="section-label">課題への共感</div>
+        <h2 class="section-title">こんなお悩み、ありませんか？</h2>
+        <div class="pain-grid">
+          <div class="pain-card">
+            <p>
+              <strong>学童に入れない</strong
+              >公立の学童は定員オーバー。せっかく申請しても入れなかった…
+            </p>
+          </div>
+          <div class="pain-card">
+            <p>
+              <strong>長期休みが不安</strong
+              >夏休みや冬休みに預け先がなく、仕事を休まざるを得ない日が続く。
+            </p>
+          </div>
+          <div class="pain-card">
+            <p>
+              <strong>ただ預けるだけでいい？</strong
+              >安全に過ごせるのは大事。でも子どもには意味のある時間を過ごしてほしい。
+            </p>
+          </div>
+        </div>
+        <div class="arrow-down">↓</div>
+        <div class="solution-box">
+          <h3>地域の力で、子どもの放課後を豊かに。</h3>
+          <p>
+            私たちは地元企業・行政・教育の専門家がタッグを組んだ新しい形の学童保育施設です。<br />安心の見守りと、企業ならではの体験プログラムを提供します。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="inner">
+        <div class="section-label">特徴・強み</div>
+        <h2 class="section-title">わたしたちにしかできないこと</h2>
+        <div class="feat-grid">
+          <div class="feat-card">
+            <div class="feat-icon g">🏭</div>
+            <h4>企業提供の特別体験</h4>
+            <p>
+              地元IT企業・農業法人・ものづくり工場などが提供するリアルなワークショップ。子どもが本物の仕事現場を体験します。
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon a">🔒</div>
+            <h4>安心のセキュリティ</h4>
+            <p>
+              ICカード入退室管理、常時カメラ監視、アプリでのリアルタイム来所通知。保護者の方が安心して働けます。
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon t">🚌</div>
+            <h4>送迎サービス完備</h4>
+            <p>
+              指定の小学校から施設まで専用車で送迎。延長対応（事前予約制）でサポートします。
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon g">📚</div>
+            <h4>学習サポート</h4>
+            <p>
+              有資格の指導員が宿題の時間を確保・サポート。学習習慣の定着を丁寧に支援します。
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon a">🌿</div>
+            <h4>豊かな自然環境</h4>
+            <p>
+              屋外遊び場・菜園スペースを完備。季節の野菜を育てるなど、地方ならではの体験を。
+            </p>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon t">👨‍👩‍👧</div>
+            <h4>少人数制</h4>
+            <p>
+              定員20名の小規模運営。子ども一人ひとりに目が届く、アットホームな環境で過ごせます。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="program">
+      <div class="inner">
+        <div class="section-label">プログラム</div>
+        <h2 class="section-title">一日の流れ</h2>
+        <p class="section-lead">
+          放課後の時間をフル活用した、学びと遊びのバランスの取れたプログラムです。
+        </p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">15:00</div>
+            <div class="tl-label">登所・おやつタイム</div>
+            <div class="tl-desc">
+              学校から到着後、手洗い・着替え。仲間とおやつを食べながらリラックス。
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">15:30</div>
+            <div class="tl-label">宿題・自習タイム</div>
+            <div class="tl-desc">
+              指導員のサポートのもと、翌日の宿題を計画的に終わらせます。
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">16:15</div>
+            <div class="tl-label">企業提供ワークショップ / 屋外活動</div>
+            <div class="tl-desc">
+              曜日ごとに変わる特別プログラム。プログラミング・農業体験・ものづくり・スポーツなど。
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">17:30</div>
+            <div class="tl-label">自由遊び・読書タイム</div>
+            <div class="tl-desc">
+              子ども自身が好きな活動を選んで過ごす時間。
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-time">18:00</div>
+            <div class="tl-label">お迎え・閉所</div>
+            <div class="tl-desc">
+              保護者へのお迎えor送迎バスでご自宅へ。延長利用は最大19:00まで（要予約・別途料金）。
+            </div>
+          </div>
+          <div class="tl-item">
+            <div
+              class="tl-dot"
+              style="
+                background: var(--amber);
+                box-shadow: 0 0 0 2px var(--amber);
+              "
+            ></div>
+            <div class="tl-time" style="color: var(--amber)">
+              長期休み特別プログラム
+            </div>
+            <div class="tl-label">夏休み・冬休み・春休み対応</div>
+            <div class="tl-desc">
+              8:00〜18:00の全日対応。工場見学・農業体験・サマーキャンプなど特別イベントを多数実施。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section" id="info">
+      <div class="inner">
+        <div class="section-label">利用案内</div>
+        <h2 class="section-title">募集要項・ご利用案内</h2>
+        <table class="info-table">
+          <tr>
+            <th>対象</th>
+            <td>
+              <div class="badge-row">
+                <span class="badge">小学1年生</span><span class="badge">〜</span
+                ><span class="badge">小学6年生</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>定員</th>
+            <td>20名（先着順・書類選考あり）</td>
+          </tr>
+          <tr>
+            <th>実施場所</th>
+            <td>
+              〇〇市〇〇町 ××ビル2F（〇〇小学校より徒歩5分 / 専用バスあり）
+            </td>
+          </tr>
+          <tr>
+            <th>開所日時</th>
+            <td>
+              月〜金 15:00〜18:00（延長〜19:00）<br />長期休暇中 8:00〜18:00
+            </td>
+          </tr>
+          <tr>
+            <th>利用料金</th>
+            <td>
+              <span class="price-big">月額 ¥22,000〜</span><br /><span
+                style="font-size: 13px; color: var(--gray-mid)"
+                >※おやつ代・教材費込み。詳細はお問い合わせください。</span
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>入所申込</th>
+            <td>説明会参加後、申込書提出 → 書類選考 → 入所決定通知</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="staff-faq">
+      <div class="inner">
+        <div class="section-label">運営体制</div>
+        <h2 class="section-title">子どもを支えるスタッフ・体制</h2>
+        <div class="staff-row">
+          <div class="staff-card">
+            <div class="staff-avatar green">👩‍🏫</div>
+            <h5>放課後児童支援員</h5>
+            <p>
+              国家資格保有者が常時2名以上在籍。子どもの安全と成長をプロが見守ります。
+            </p>
+          </div>
+          <div class="staff-card">
+            <div class="staff-avatar amber">👨‍💼</div>
+            <h5>企業スタッフ</h5>
+            <p>
+              ワークショップを担当する地元企業の社員。本物の技術・知識を子どもたちに伝えます。
+            </p>
+          </div>
+          <div class="staff-card">
+            <div class="staff-avatar teal">🏥</div>
+            <h5>看護師・保健スタッフ</h5>
+            <p>
+              週1回の保健スタッフ常駐。緊急時にも迅速に対応できる体制を整えています。
+            </p>
+          </div>
+        </div>
+        <div class="faq-label">よくあるご質問</div>
+        <div class="faq-item">
+          <div class="faq-q">急に体調が悪くなった場合はどうなりますか？</div>
+          <div class="faq-a">
+            スタッフがすぐに保護者へ連絡し、状況に応じて近隣の提携クリニックへ付き添います。
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">兄弟・姉妹で利用できますか？</div>
+          <div class="faq-a">
+            はい、可能です。定員に空きがある場合、きょうだいは優先的にご入所いただけます。兄弟割引（2人目以降10%割引）も適用されます。
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">学校のない土曜日の対応はありますか？</div>
+          <div class="faq-a">
+            現在は平日・長期休暇のみの対応となっております。土曜日対応は2025年度以降を検討中です。
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">発達に特性のある子どもでも利用できますか？</div>
+          <div class="faq-a">
+            個別面談の上、できる限り柔軟に対応いたします。まずはお気軽にご相談ください。
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">見学はできますか？</div>
+          <div class="faq-a">
+            随時受け付けております。下記のお問い合わせフォームまたはお電話にてご予約ください。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-footer">
+      <h2>まずは、説明会にお越しください。</h2>
+      <p>
+        入所前の見学・個別相談も随時受け付けています。<br />お子様のことを一緒に考えましょう。
+      </p>
+      <div class="cta-btns">
+        <a href="#" class="btn-white">説明会に申し込む</a>
+        <a href="#" class="btn-outline">施設見学を予約する</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        © 2024 〇〇学童クラブ　｜　〇〇市〇〇町　｜　TEL:
+        000-000-0000　｜　Email: info@example.com
+      </p>
+    </footer>
+  </body>
+</html>
